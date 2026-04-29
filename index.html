@@ -22,7 +22,6 @@
     --accent-dim: rgba(232,213,176,0.12);
     --accent-dim2: rgba(232,213,176,0.06);
     --green: #4ade80;
-    --green-dim: rgba(74,222,128,0.1);
     --mono: 'DM Mono', monospace;
     --display: 'Syne', sans-serif;
   }
@@ -39,477 +38,145 @@
     overflow-x: hidden;
   }
 
-  /* noise overlay */
   body::before {
     content: '';
-    position: fixed;
-    inset: 0;
+    position: fixed; inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.4;
+    pointer-events: none; z-index: 0; opacity: 0.4;
   }
 
-  .container {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    position: relative;
-    z-index: 1;
-  }
+  .container { max-width: 780px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
 
   /* NAV */
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     padding: 1.25rem 0;
     border-bottom: 1px solid var(--border);
     background: rgba(10,10,10,0.85);
     backdrop-filter: blur(12px);
   }
-
-  nav .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .nav-name {
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--accent);
-    letter-spacing: 0.02em;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--text-2);
-    text-decoration: none;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-
+  nav .container { display: flex; align-items: center; justify-content: space-between; }
+  .nav-name { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 0.02em; }
+  .nav-links { display: flex; gap: 1.75rem; list-style: none; }
+  .nav-links a { font-family: var(--mono); font-size: 12px; color: var(--text-2); text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
   .nav-links a:hover { color: var(--text); }
 
   /* HERO */
-  .hero {
-    padding: 10rem 0 6rem;
-  }
+  .hero { padding: 10rem 0 6rem; }
+  .hero-eyebrow { font-family: var(--mono); font-size: 11px; color: var(--text-3); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+  .hero-eyebrow::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--text-3); }
+  .hero-name { font-size: clamp(3rem, 8vw, 5.5rem); font-weight: 800; line-height: 1.0; letter-spacing: -0.03em; color: var(--text); margin-bottom: 1.5rem; }
+  .hero-name span { color: var(--accent); }
+  .hero-desc { font-family: var(--mono); font-size: 14px; color: var(--text-2); line-height: 1.8; max-width: 480px; margin-bottom: 0.75rem; }
+  .hero-availability { font-family: var(--mono); font-size: 11px; color: var(--green); letter-spacing: 0.08em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 2.5rem; }
+  .hero-availability::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); animation: pulse 2s infinite; }
+  .hero-links { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-  .hero-eyebrow {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-3);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
+  .btn { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; padding: 0.6rem 1.25rem; border-radius: 2px; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; }
+  .btn-primary { background: var(--accent); color: #0a0a0a; font-weight: 500; }
+  .btn-primary:hover { background: #f5e8c8; transform: translateY(-1px); }
+  .btn-ghost { border: 1px solid var(--border-hover); color: var(--text-2); }
+  .btn-ghost:hover { border-color: var(--text-2); color: var(--text); transform: translateY(-1px); }
 
-  .hero-eyebrow::before {
-    content: '';
-    display: inline-block;
-    width: 24px;
-    height: 1px;
-    background: var(--text-3);
-  }
-
-  .hero-name {
-    font-size: clamp(3rem, 8vw, 5.5rem);
-    font-weight: 800;
-    line-height: 1.0;
-    letter-spacing: -0.03em;
-    color: var(--text);
-    margin-bottom: 1.5rem;
-  }
-
-  .hero-name span {
-    color: var(--accent);
-  }
-
-  .hero-desc {
-    font-family: var(--mono);
-    font-size: 14px;
-    color: var(--text-2);
-    line-height: 1.8;
-    max-width: 480px;
-    margin-bottom: 3rem;
-  }
-
-  .hero-links {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .btn {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 0.6rem 1.25rem;
-    border-radius: 2px;
-    transition: all 0.2s;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .btn-primary {
-    background: var(--accent);
-    color: #0a0a0a;
-    font-weight: 500;
-  }
-
-  .btn-primary:hover {
-    background: #f5e8c8;
-    transform: translateY(-1px);
-  }
-
-  .btn-ghost {
-    border: 1px solid var(--border-hover);
-    color: var(--text-2);
-  }
-
-  .btn-ghost:hover {
-    border-color: var(--text-2);
-    color: var(--text);
-    transform: translateY(-1px);
-  }
-
-  /* SECTION */
-  section {
-    padding: 5rem 0;
-    border-top: 1px solid var(--border);
-  }
-
-  .section-header {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    margin-bottom: 3rem;
-  }
-
-  .section-num {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-3);
-    letter-spacing: 0.08em;
-  }
-
-  .section-title {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text-2);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
+  /* SECTIONS */
+  section { padding: 5rem 0; border-top: 1px solid var(--border); }
+  .section-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 3rem; }
+  .section-num { font-family: var(--mono); font-size: 11px; color: var(--text-3); letter-spacing: 0.08em; }
+  .section-title { font-size: 13px; font-weight: 500; color: var(--text-2); letter-spacing: 0.08em; text-transform: uppercase; }
 
   /* CASE CARDS */
-  .case-card {
-    background: var(--bg-2);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-    transition: border-color 0.2s, background 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
+  .case-card { background: var(--bg-2); border: 1px solid var(--border); border-radius: 4px; padding: 2rem; margin-bottom: 1.5rem; transition: border-color 0.2s, background 0.2s; position: relative; overflow: hidden; }
+  .case-card::before { content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 0; background: var(--accent); transition: height 0.3s ease; }
+  .case-card:hover { border-color: var(--border-hover); background: var(--bg-3); }
+  .case-card:hover::before { height: 100%; }
+  .case-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1.25rem; }
+  .case-tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; background: var(--accent-dim2); color: var(--accent); border: 1px solid rgba(232,213,176,0.15); white-space: nowrap; }
+  .case-title { font-size: 19px; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
+  .case-problem { font-family: var(--mono); font-size: 13px; color: var(--text-2); line-height: 1.7; margin-bottom: 1.5rem; }
+  .case-metrics { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; padding: 1rem 1.25rem; background: var(--accent-dim2); border-radius: 2px; border: 1px solid rgba(232,213,176,0.08); }
+  .metric-val { font-family: var(--mono); font-size: 20px; font-weight: 500; color: var(--accent); display: block; line-height: 1.2; }
+  .metric-label { font-family: var(--mono); font-size: 10px; color: var(--text-3); letter-spacing: 0.06em; text-transform: uppercase; }
+  .case-flow { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 1.25rem; }
+  .flow-node { font-family: var(--mono); font-size: 11px; color: var(--text-2); background: var(--bg); border: 1px solid var(--border); padding: 4px 10px; border-radius: 2px; }
+  .flow-sep { color: var(--text-3); font-size: 12px; font-family: var(--mono); }
+  .case-stack { display: flex; gap: 6px; flex-wrap: wrap; }
+  .stack-pill { font-family: var(--mono); font-size: 10px; color: var(--text-3); border: 1px solid var(--border); padding: 3px 8px; border-radius: 2px; letter-spacing: 0.04em; }
+  .case-divider { font-family: var(--mono); font-size: 10px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; margin-top: 0.25rem; }
 
-  .case-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 2px;
-    height: 0;
-    background: var(--accent);
-    transition: height 0.3s ease;
-  }
-
-  .case-card:hover {
-    border-color: var(--border-hover);
-    background: var(--bg-3);
-  }
-
-  .case-card:hover::before {
-    height: 100%;
-  }
-
-  .case-top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 1.25rem;
-  }
-
-  .case-tag {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 2px;
-    background: var(--accent-dim2);
-    color: var(--accent);
-    border: 1px solid rgba(232,213,176,0.15);
-    white-space: nowrap;
-  }
-
-  .case-title {
-    font-size: 19px;
-    font-weight: 700;
-    color: var(--text);
-    line-height: 1.3;
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.01em;
-  }
-
-  .case-problem {
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--text-2);
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-  }
-
-  .case-metrics {
-    display: flex;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    margin-bottom: 1.5rem;
-    padding: 1rem 1.25rem;
-    background: var(--accent-dim2);
-    border-radius: 2px;
-    border: 1px solid rgba(232,213,176,0.08);
-  }
-
-  .metric-item { }
-
-  .metric-val {
-    font-family: var(--mono);
-    font-size: 20px;
-    font-weight: 500;
-    color: var(--accent);
-    display: block;
-    line-height: 1.2;
-  }
-
-  .metric-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text-3);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  .case-flow {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-bottom: 1.25rem;
-  }
-
-  .flow-node {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-2);
-    background: var(--bg);
-    border: 1px solid var(--border);
-    padding: 4px 10px;
-    border-radius: 2px;
-  }
-
-  .flow-sep {
-    color: var(--text-3);
-    font-size: 12px;
-    font-family: var(--mono);
-  }
-
-  .case-stack {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-
-  .stack-pill {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text-3);
-    border: 1px solid var(--border);
-    padding: 3px 8px;
-    border-radius: 2px;
-    letter-spacing: 0.04em;
-  }
-
-  /* SIDE PROJECT */
-  .side-card {
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 1.25rem 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    transition: border-color 0.2s;
-  }
-
+  /* SIDE CARDS */
+  .subsection-divider { font-family: var(--mono); font-size: 10px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.1em; margin: 2.5rem 0 1rem; display: flex; align-items: center; gap: 0.75rem; }
+  .subsection-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .side-card { border: 1px solid var(--border); border-radius: 4px; padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; transition: border-color 0.2s; margin-bottom: 1rem; }
   .side-card:hover { border-color: var(--border-hover); }
-
+  .side-card:last-child { margin-bottom: 0; }
   .side-info { flex: 1; }
+  .side-name { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 0.25rem; }
+  .side-desc { font-family: var(--mono); font-size: 12px; color: var(--text-2); line-height: 1.6; }
+  .side-pills { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 0.5rem; }
 
-  .side-name {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 0.25rem;
-  }
+  .live-dot { display: inline-flex; align-items: center; gap: 5px; font-family: var(--mono); font-size: 10px; color: var(--green); letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+  .live-dot::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); animation: pulse 2s infinite; }
+  .wip-dot { display: inline-flex; align-items: center; gap: 5px; font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; opacity: 0.7; }
+  .wip-dot::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 3s infinite; }
 
-  .side-desc {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--text-2);
-    line-height: 1.6;
-  }
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 1.5rem; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 6px; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--accent-dim), transparent); }
+  .tl-item { position: relative; margin-bottom: 3rem; }
+  .tl-item::before { content: ''; position: absolute; left: -1.5rem; top: 6px; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px rgba(232,213,176,0.4); transform: translateX(-3px); }
+  .tl-meta { display: flex; align-items: baseline; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.25rem; }
+  .tl-role { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+  .tl-company { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; }
+  .tl-period { font-family: var(--mono); font-size: 11px; color: var(--text-3); margin-left: auto; }
+  .tl-context { font-family: var(--mono); font-size: 11px; color: var(--text-3); font-style: italic; margin-bottom: 0.75rem; letter-spacing: 0.02em; }
+  .tl-bullets { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .tl-bullets li { font-family: var(--mono); font-size: 12px; color: var(--text-2); padding-left: 1rem; position: relative; line-height: 1.7; }
+  .tl-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--text-3); font-size: 10px; top: 3px; }
+  .tl-bullets strong { color: var(--text); font-weight: 500; }
 
-  .side-pills {
-    display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
-    margin-top: 0.5rem;
-  }
-
-  .live-dot {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--green);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-
-  .live-dot::before {
-    content: '';
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--green);
-    box-shadow: 0 0 6px var(--green);
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
+  /* STACK GRID */
+  .stack-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .stack-cell { background: var(--bg-2); padding: 1.25rem 1.5rem; }
+  .stack-cell-label { font-family: var(--mono); font-size: 10px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+  .stack-cell-items { display: flex; flex-direction: column; gap: 5px; }
+  .stack-cell-item { font-family: var(--mono); font-size: 12px; color: var(--text-2); display: flex; align-items: center; gap: 6px; }
+  .stack-cell-item::before { content: '·'; color: var(--accent); font-size: 1rem; line-height: 1; }
 
   /* ABOUT */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .about-cell {
-    background: var(--bg-2);
-    padding: 1.5rem;
-  }
-
-  .about-cell-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text-3);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 0.5rem;
-  }
-
-  .about-cell-val {
-    font-size: 14px;
-    color: var(--text);
-    line-height: 1.6;
-  }
+  .about-text { font-family: var(--mono); font-size: 13px; color: var(--text-2); line-height: 1.9; max-width: 620px; margin-bottom: 2.5rem; }
+  .about-text strong { color: var(--accent); font-weight: 500; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+  .about-cell { background: var(--bg-2); padding: 1.5rem; }
+  .about-cell-label { font-family: var(--mono); font-size: 10px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+  .about-cell-val { font-size: 14px; color: var(--text); line-height: 1.6; }
 
   /* FOOTER */
-  footer {
-    padding: 3rem 0;
-    border-top: 1px solid var(--border);
-  }
-
-  .footer-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .footer-name {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--text-3);
-  }
-
-  .footer-links {
-    display: flex;
-    gap: 1.5rem;
-  }
-
-  .footer-links a {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--text-3);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
+  footer { padding: 3rem 0; border-top: 1px solid var(--border); }
+  .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .footer-name { font-family: var(--mono); font-size: 12px; color: var(--text-3); }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { font-family: var(--mono); font-size: 12px; color: var(--text-3); text-decoration: none; transition: color 0.2s; }
   .footer-links a:hover { color: var(--text-2); }
 
   /* ANIMATIONS */
-  .fade-in {
-    opacity: 0;
-    transform: translateY(16px);
-    animation: fadeIn 0.6s ease forwards;
-  }
-
-  @keyframes fadeIn {
-    to { opacity: 1; transform: translateY(0); }
-  }
-
+  .fade-in { opacity: 0; transform: translateY(16px); animation: fadeIn 0.6s ease forwards; }
+  @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
   .fade-in:nth-child(1) { animation-delay: 0.1s; }
   .fade-in:nth-child(2) { animation-delay: 0.2s; }
   .fade-in:nth-child(3) { animation-delay: 0.3s; }
   .fade-in:nth-child(4) { animation-delay: 0.4s; }
+  .fade-in:nth-child(5) { animation-delay: 0.5s; }
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  /* DIVIDER LABEL */
-  .case-divider {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text-3);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 0.5rem;
-    margin-top: 0.25rem;
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .stack-grid { grid-template-columns: 1fr 1fr; }
+    .about-grid { grid-template-columns: 1fr; }
+    .nav-links { gap: 1.2rem; }
+    .tl-period { margin-left: 0; width: 100%; }
   }
 </style>
 </head>
@@ -520,6 +187,8 @@
     <span class="nav-name">vini.peixoto</span>
     <ul class="nav-links">
       <li><a href="#work">Work</a></li>
+      <li><a href="#experience">Exp</a></li>
+      <li><a href="#stack">Stack</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="https://linkedin.com/in/viniciusspeixoto" target="_blank">LinkedIn ↗</a></li>
       <li><a href="https://github.com/masterconsult" target="_blank">GitHub ↗</a></li>
@@ -529,134 +198,119 @@
 
 <div class="container">
 
+  <!-- HERO -->
   <div class="hero">
     <div class="hero-eyebrow fade-in">Rio de Janeiro, BR</div>
     <h1 class="hero-name fade-in">Vini<br><span>Peixoto</span></h1>
     <p class="hero-desc fade-in">
-      Tech Lead & Product Engineer.<br>
-      Conecto negócio e tecnologia — automação, integrações de sistemas e produto digital.
+      Data & Automation Engineer.<br>
+      Conecto negócio e tecnologia — automação, integrações de sistemas e produto digital.<br>
+      Engenheiro de Produção · Pós-grad. Arquitetura de Dados, PUC Minas.
     </p>
+    <div class="hero-availability fade-in">Disponível para oportunidades remotas</div>
     <div class="hero-links fade-in">
       <a href="#work" class="btn btn-primary">Ver projetos ↓</a>
       <a href="https://linkedin.com/in/viniciusspeixoto" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
-      <a href="https://github.com/masterconsultbr" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+      <a href="https://github.com/masterconsult" target="_blank" class="btn btn-ghost">GitHub ↗</a>
       <a href="mailto:peixoto.vsp@gmail.com" class="btn btn-ghost">peixoto.vsp@gmail.com</a>
       <a href="tel:+5521999884541" class="btn btn-ghost">+55 21 99988-4541</a>
     </div>
   </div>
 
+  <!-- 01 WORK -->
   <section id="work">
     <div class="section-header">
       <span class="section-num">01</span>
       <span class="section-title">Selected work</span>
     </div>
 
-    <!-- CASE 1 -->
-    <div class="case-card">
-      <div class="case-top">
-        <div>
-          <div class="case-tag">Automation · AI</div>
-        </div>
-      </div>
+    <div class="case-card reveal">
+      <div class="case-top"><div class="case-tag">Automation · AI</div></div>
       <div class="case-title">Inbound SDR automation</div>
-      <p class="case-problem">
-        Um time de BizDev processava manualmente o inbound de 80 influenciadores — lendo emails individualmente, filtrando spam de fan mail, e roteando propostas para o responsável de cada carteira. Com ~20 propostas reais/dia, o processo era lento e escalava só com headcount.
-      </p>
+      <p class="case-problem">Um time de BizDev processava manualmente o inbound de 80 influenciadores — lendo emails individualmente, filtrando spam de fan mail, e roteando propostas para o responsável de cada carteira. Com ~20 propostas reais/dia, o processo escalava só com headcount.</p>
       <div class="case-metrics">
-        <div class="metric-item">
-          <span class="metric-val">80</span>
-          <span class="metric-label">caixas monitoradas</span>
-        </div>
-        <div class="metric-item">
-          <span class="metric-val">~140</span>
-          <span class="metric-label">emails processados/semana</span>
-        </div>
-        <div class="metric-item">
-          <span class="metric-val">0</span>
-          <span class="metric-label">triagem manual</span>
-        </div>
+        <div class="metric-item"><span class="metric-val">80</span><span class="metric-label">caixas monitoradas</span></div>
+        <div class="metric-item"><span class="metric-val">~140</span><span class="metric-label">emails processados/semana</span></div>
+        <div class="metric-item"><span class="metric-val">0</span><span class="metric-label">triagem manual</span></div>
       </div>
       <div class="case-divider">Fluxo</div>
       <div class="case-flow">
-        <span class="flow-node">Leitura (80 caixas)</span>
-        <span class="flow-sep">→</span>
-        <span class="flow-node">Classificação IA</span>
-        <span class="flow-sep">→</span>
-        <span class="flow-node">Filtro spam</span>
-        <span class="flow-sep">→</span>
-        <span class="flow-node">Deal no Pipedrive</span>
-        <span class="flow-sep">→</span>
-        <span class="flow-node">Roteamento por carteira</span>
-        <span class="flow-sep">→</span>
+        <span class="flow-node">Leitura (80 caixas)</span><span class="flow-sep">→</span>
+        <span class="flow-node">Classificação IA</span><span class="flow-sep">→</span>
+        <span class="flow-node">Filtro spam</span><span class="flow-sep">→</span>
+        <span class="flow-node">Deal no Pipedrive</span><span class="flow-sep">→</span>
+        <span class="flow-node">Roteamento por carteira</span><span class="flow-sep">→</span>
         <span class="flow-node">Sugestão de resposta</span>
       </div>
       <div class="case-stack">
-        <span class="stack-pill">n8n</span>
-        <span class="stack-pill">Pipedrive API</span>
-        <span class="stack-pill">LLM</span>
-        <span class="stack-pill">Email API</span>
-        <span class="stack-pill">JavaScript</span>
+        <span class="stack-pill">n8n</span><span class="stack-pill">Pipedrive API</span><span class="stack-pill">LLM</span><span class="stack-pill">Email API</span><span class="stack-pill">JavaScript</span>
       </div>
     </div>
 
-    <!-- CASE 2 -->
-    <div class="case-card">
-      <div class="case-top">
-        <div>
-          <div class="case-tag">Systems Integration</div>
-        </div>
-      </div>
+    <div class="case-card reveal">
+      <div class="case-top"><div class="case-tag">Systems Integration</div></div>
       <div class="case-title">CRM & ops pipeline — tripartite integration</div>
-      <p class="case-problem">
-        7 pessoas de BizDev registravam manualmente cada campanha em dois sistemas distintos. Com ~200 campanhas/mês, isso gerava duplicação de esforço, inconsistência de dados entre CRM, operações e financeiro, e risco constante de perda de informação.
-      </p>
+      <p class="case-problem">7 pessoas de BizDev registravam manualmente cada campanha em dois sistemas distintos. Com ~200 campanhas/mês, isso gerava duplicação de esforço, inconsistência de dados entre CRM, operações e financeiro, e risco constante de perda de informação.</p>
       <div class="case-metrics">
-        <div class="metric-item">
-          <span class="metric-val">200</span>
-          <span class="metric-label">campanhas/mês sincronizadas</span>
-        </div>
-        <div class="metric-item">
-          <span class="metric-val">~33h</span>
-          <span class="metric-label">entrada manual eliminada/mês</span>
-        </div>
-        <div class="metric-item">
-          <span class="metric-val">~R$3k</span>
-          <span class="metric-label">redução de custo operacional/mês</span>
-        </div>
+        <div class="metric-item"><span class="metric-val">200</span><span class="metric-label">campanhas/mês sincronizadas</span></div>
+        <div class="metric-item"><span class="metric-val">~33h</span><span class="metric-label">entrada manual eliminada/mês</span></div>
+        <div class="metric-item"><span class="metric-val">~R$3k</span><span class="metric-label">redução custo operacional/mês</span></div>
       </div>
       <div class="case-divider">Fluxo</div>
       <div class="case-flow">
-        <span class="flow-node">Pipedrive (origem)</span>
-        <span class="flow-sep">→</span>
-        <span class="flow-node">n8n detecta evento</span>
-        <span class="flow-sep">→</span>
-        <span class="flow-node">Espelho no Monday</span>
-        <span class="flow-sep">↔</span>
-        <span class="flow-node">Sync bidirecional</span>
-        <span class="flow-sep">→</span>
+        <span class="flow-node">Pipedrive (origem)</span><span class="flow-sep">→</span>
+        <span class="flow-node">n8n detecta evento</span><span class="flow-sep">→</span>
+        <span class="flow-node">Espelho no Monday</span><span class="flow-sep">↔</span>
+        <span class="flow-node">Sync bidirecional</span><span class="flow-sep">→</span>
         <span class="flow-node">NetSuite atualizado</span>
       </div>
       <div class="case-stack">
-        <span class="stack-pill">n8n</span>
-        <span class="stack-pill">Pipedrive API</span>
-        <span class="stack-pill">Monday.com API</span>
-        <span class="stack-pill">NetSuite REST API</span>
-        <span class="stack-pill">Webhooks</span>
-        <span class="stack-pill">JavaScript</span>
+        <span class="stack-pill">n8n</span><span class="stack-pill">Pipedrive API</span><span class="stack-pill">Monday.com API</span><span class="stack-pill">NetSuite REST API</span><span class="stack-pill">Webhooks</span><span class="stack-pill">JavaScript</span>
       </div>
     </div>
 
-    <!-- SIDE PROJECT -->
-    <div class="case-divider" style="margin-top:2rem;">Side project</div>
-    <div class="side-card">
+    <div class="case-card reveal">
+      <div class="case-top"><div class="case-tag">Product Engineering · Data</div></div>
+      <div class="case-title">InfluencerCRM — motor financeiro customizado</div>
+      <p class="case-problem">O Pipedrive não consegue modelar influenciadores como entidade de produto nem calcular a lógica financeira granular da Play9. Cada deal envolve múltiplos influenciadores com repasse, GVM e receita retida distintos — informação que vivia em planilhas desconectadas do CRM.</p>
+      <div class="case-metrics">
+        <div class="metric-item"><span class="metric-val">3</span><span class="metric-label">níveis financeiros (GVM · repasse · receita retida)</span></div>
+        <div class="metric-item"><span class="metric-val">7</span><span class="metric-label">estágios de pipeline modelados</span></div>
+        <div class="metric-item"><span class="metric-val">JSONB</span><span class="metric-label">custom fields com GIN index</span></div>
+      </div>
+      <div class="case-divider">Arquitetura</div>
+      <div class="case-flow">
+        <span class="flow-node">React + TypeScript</span><span class="flow-sep">→</span>
+        <span class="flow-node">Fastify API</span><span class="flow-sep">→</span>
+        <span class="flow-node">Drizzle ORM</span><span class="flow-sep">→</span>
+        <span class="flow-node">PostgreSQL / Supabase</span>
+      </div>
+      <div class="case-stack">
+        <span class="stack-pill">React</span><span class="stack-pill">TypeScript</span><span class="stack-pill">Fastify</span><span class="stack-pill">Drizzle ORM</span><span class="stack-pill">PostgreSQL</span><span class="stack-pill">Supabase</span><span class="stack-pill">Zod</span>
+      </div>
+    </div>
+
+    <div class="subsection-divider reveal">Produtos & side projects</div>
+
+    <div class="side-card reveal">
+      <div class="side-info">
+        <div class="side-name">Play9 AI Hub</div>
+        <div class="side-desc">Plataforma interna centralizada com múltiplos assistentes de IA especializados. Controle de acesso admin-only, JWT 2h, rate limiting e versionamento de assistentes.</div>
+        <div class="side-pills">
+          <span class="stack-pill">React + Vite</span><span class="stack-pill">Shadcn/UI</span><span class="stack-pill">Fastify</span><span class="stack-pill">Supabase</span>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.75rem;">
+        <span class="wip-dot">em prod</span>
+      </div>
+    </div>
+
+    <div class="side-card reveal">
       <div class="side-info">
         <div class="side-name">Marolo App</div>
         <div class="side-desc">Gestão financeira e de calendário para time de futebol amador. Controle de caixa, inadimplência, estatísticas e agenda.</div>
         <div class="side-pills">
-          <span class="stack-pill">React</span>
-          <span class="stack-pill">Vite</span>
-          <span class="stack-pill">Supabase</span>
-          <span class="stack-pill">Netlify</span>
+          <span class="stack-pill">React</span><span class="stack-pill">Vite</span><span class="stack-pill">Supabase</span><span class="stack-pill">Netlify</span>
         </div>
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.75rem;">
@@ -666,27 +320,136 @@
     </div>
   </section>
 
-  <section id="about">
+  <!-- 02 EXPERIENCE -->
+  <section id="experience">
     <div class="section-header">
       <span class="section-num">02</span>
+      <span class="section-title">Experiência</span>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item reveal">
+        <div class="tl-meta">
+          <span class="tl-role">Senior Analyst — Process & Automation</span>
+          <span class="tl-company">Play9 Content Group</span>
+          <span class="tl-period">2023 – atual</span>
+        </div>
+        <div class="tl-context">Media tech · gestão de influenciadores · PMO & Governança</div>
+        <ul class="tl-bullets">
+          <li>Mapeamento e automação de <strong>~80% do fluxo comercial</strong> via n8n + Pipedrive API</li>
+          <li>SDR com IA: classificação automática de e-mails inbound, criação de cards no CRM e sugestão de resposta</li>
+          <li>Integração tripartite <strong>Pipedrive · NetSuite · HighQ</strong> — ~R$3k/mês de economia operacional</li>
+          <li>Otimização de processos jurídicos com redução de <strong>~30% do esforço operacional</strong></li>
+          <li>Modelagem de pipelines de dados e dashboards no Metabase / Power BI para apoio à decisão</li>
+          <li>Construção do <strong>Play9 AI Hub</strong> — plataforma interna de assistentes de IA especializados</li>
+        </ul>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-meta">
+          <span class="tl-role">Fundador & Consultor</span>
+          <span class="tl-company">MasterLab.ia</span>
+          <span class="tl-period">2022 – atual</span>
+        </div>
+        <div class="tl-context">Consultoria de automação com IA e transformação digital para PMEs</div>
+        <ul class="tl-bullets">
+          <li>Diagnóstico e implementação de automações (n8n, APIs, LLMs) para clientes de diferentes setores</li>
+          <li>Entrega ponta a ponta: da modelagem do problema ao deploy e documentação</li>
+          <li>Sistema <strong>multi-agente</strong> de geração de conteúdo: Trends Scout → Copywriter → Creative Brief</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 STACK -->
+  <section id="stack">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <span class="section-title">Stack</span>
+    </div>
+    <div class="stack-grid">
+      <div class="stack-cell reveal">
+        <div class="stack-cell-label">Linguagens & Dados</div>
+        <div class="stack-cell-items">
+          <span class="stack-cell-item">Python</span>
+          <span class="stack-cell-item">SQL</span>
+          <span class="stack-cell-item">JavaScript</span>
+          <span class="stack-cell-item">REST APIs / JSON</span>
+        </div>
+      </div>
+      <div class="stack-cell reveal">
+        <div class="stack-cell-label">Integração & Automação</div>
+        <div class="stack-cell-items">
+          <span class="stack-cell-item">n8n</span>
+          <span class="stack-cell-item">Pipedrive API</span>
+          <span class="stack-cell-item">NetSuite REST</span>
+          <span class="stack-cell-item">Monday.com</span>
+        </div>
+      </div>
+      <div class="stack-cell reveal">
+        <div class="stack-cell-label">Backend & DB</div>
+        <div class="stack-cell-items">
+          <span class="stack-cell-item">Fastify</span>
+          <span class="stack-cell-item">Drizzle ORM</span>
+          <span class="stack-cell-item">PostgreSQL</span>
+          <span class="stack-cell-item">Supabase</span>
+        </div>
+      </div>
+      <div class="stack-cell reveal">
+        <div class="stack-cell-label">Frontend</div>
+        <div class="stack-cell-items">
+          <span class="stack-cell-item">React + TypeScript</span>
+          <span class="stack-cell-item">Vite</span>
+          <span class="stack-cell-item">Shadcn/UI · Tailwind</span>
+        </div>
+      </div>
+      <div class="stack-cell reveal">
+        <div class="stack-cell-label">Analytics & BI</div>
+        <div class="stack-cell-items">
+          <span class="stack-cell-item">Metabase</span>
+          <span class="stack-cell-item">Power BI</span>
+          <span class="stack-cell-item">GCP (básico)</span>
+        </div>
+      </div>
+      <div class="stack-cell reveal">
+        <div class="stack-cell-label">IA & Agentes</div>
+        <div class="stack-cell-items">
+          <span class="stack-cell-item">LLMs (Claude, GPT)</span>
+          <span class="stack-cell-item">Prompt Engineering</span>
+          <span class="stack-cell-item">Multi-agent systems</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 ABOUT -->
+  <section id="about">
+    <div class="section-header">
+      <span class="section-num">04</span>
       <span class="section-title">About</span>
     </div>
+    <p class="about-text reveal">
+      Engenheiro de Produção com foco em <strong>automação, integração de sistemas e soluções orientadas a dados</strong>.
+      Construo coisas que eliminam trabalho manual e geram inteligência operacional — da modelagem do problema ao deploy.
+      Fundador da <strong>MasterLab.ia</strong>, consultoria de automação com IA para PMEs.
+    </p>
     <div class="about-grid">
-      <div class="about-cell">
+      <div class="about-cell reveal">
         <div class="about-cell-label">Função atual</div>
         <div class="about-cell-val">Senior Analyst & PMO<br>Play9 Content Group</div>
       </div>
-      <div class="about-cell">
+      <div class="about-cell reveal">
         <div class="about-cell-label">Foco</div>
         <div class="about-cell-val">Automação, integrações de sistemas, product thinking</div>
       </div>
-      <div class="about-cell">
+      <div class="about-cell reveal">
         <div class="about-cell-label">Stack principal</div>
         <div class="about-cell-val">n8n · Pipedrive · Monday · NetSuite · React · Supabase</div>
       </div>
-      <div class="about-cell">
+      <div class="about-cell reveal">
         <div class="about-cell-label">Formação</div>
-        <div class="about-cell-val">Engenharia de Produção<br>Rio de Janeiro, BR</div>
+        <div class="about-cell-val">Engenharia de Produção<br><span style="color:var(--accent);font-size:0.9em;">Pós-grad. Arquitetura de Dados — PUC Minas (em andamento)</span></div>
       </div>
     </div>
   </section>
@@ -706,6 +469,13 @@
     </div>
   </div>
 </footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
